@@ -80,7 +80,8 @@ function activityTimer(startTime) {
     hours = padLeadingZeros(hours);
     mins = padLeadingZeros(mins);
     secs = padLeadingZeros(secs);
-    document.getElementById('timer').innerHTML = hours + ":" + mins + ":" + secs;
+    // @TODO
+    // document.getElementById('timer').innerHTML = hours + ":" + mins + ":" + secs;
 
     clearTimeout(activityTimer.interval);
     activityTimer.interval = setTimeout(function(){ activityTimer(startTime); }, 1000);
@@ -89,58 +90,9 @@ function activityTimer(startTime) {
 // Turns off activity timer
 function stopActivityTimer() {
     clearTimeout(activityTimer.interval);
-    user.activities[0].duration = document.getElementById('timer').innerHTML; // bad solution
+    // @TODO
+    // user.activities[0].duration = document.getElementById('timer').innerHTML; // bad solution
     console.log("Stopped activity timer");
-};
-
-function getRoutinesHtml(routines) {
-    let html = "";
-
-    // Build routine buttons
-    routines.forEach((routine, i) => {
-        let id = "routine" + i; // EX: routine0
-
-        html += `
-            <button type='button' class='btn btn-primary btn-lg btn-block'
-            id="${id}">${routine.name}</button><br />
-        `;
-
-        // each routine goes to the workout page with query string updated
-        $("#routine" + i).on('click', function(){
-            window.location.href = "workout.html?routine=" + routine.name;
-        });
-    });   
-
-    return html;
-};
-
-function getHomePageHtml(routines) {
-    var routinesHtml = "";
-    var homeHtml = "";
-
-    // Build routine buttons
-    routines.forEach((routine, i) => {
-        let id = "routine" + i; // EX: routine0
-
-        routinesHtml += `
-            <button type='button' class='btn btn-primary btn-lg btn-block'
-            id="${id}">${routine.name}</button><br />
-        `;
-
-        // each routine goes to the workout page with query string updated
-        $("#routine" + i).on('click', function(){
-            window.location.href = "workout.html?routine=" + routine.name;
-        });
-    });   
-
-    homeHtml = `
-        <div class="container">
-            <h1 class="display-3 text-center">Fitness Tracker</h1>
-            ${routinesHtml}
-        </div>
-    `;
-
-    return homeHtml;
 };
 
 // Seeds all available exercises
@@ -421,6 +373,56 @@ function seedPerformanceData() {
     ];
 };
 
+// HTML BUILDING
+function buildHomePageHtml(routines) {
+    var routinesHtml = "";
+    var homeHtml = "";
+    var routineIds = [];
+
+    // Build routine buttons
+    routines.forEach((routine, i) => {
+        let id = "routine" + i; // EX: routine0
+        routineIds.push(id);
+
+        routinesHtml += `
+            <button type='button' class='btn btn-primary btn-lg btn-block'
+            id="${id}">${routine.name}</button><br />
+        `;
+    });   
+
+    homeHtml = `
+        <div class="container">
+            <h1 class="display-4 text-center mt-4 mb-5">Fitness Tracker</h1>
+            ${routinesHtml}
+        </div>
+    `;
+
+    // Ensure id has been cleared before adding new content
+    $("#index").empty();
+    $("#index").append(homeHtml);
+
+    // Add click event to each routine button
+    routineIds.forEach((id, i) => {
+        $("#" + id).on('click', function(){
+            buildActivityPageHtml(user.routines[i], user.exercises);
+        });
+    });
+
+};
+
+function buildActivityPageHtml(routine, exercises) {
+    console.log(routine, exercises);
+    // @TODO
+
+    // Start new activity now
+    user.activities.push( createActivity(new Date(), null, null) );
+    activityTimer(new Date());
+};
+
+function buildSummaryPageHtml(routines, exercises) {
+    // @TODO
+};
+
 // -----BEGIN DATA-----
 var user = createUser();
 user.exercises = seedExercises();
@@ -430,11 +432,5 @@ console.log(user);
 
 // -----BEGIN HTML-----
 $(document).ready(function(){
-    // Build Home page
-    var homeHtml = getHomePageHtml(user.routines);
-    $("#home").append(homeHtml);
-
-    // Start new activity now
-    user.activities.push( createActivity(new Date(), null, null) );
-    activityTimer(new Date());
+    buildHomePageHtml(user.routines);
 });
