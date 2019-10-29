@@ -4,13 +4,14 @@ function createUser() {
     return {
         exercises: [],
         routines: [],
-        activities: []
+        activities: [],
+        seededData: null
     };
 };
 
 function createExercise(category, name) {
     return {
-        // Index position is Id
+        // Index position is exerciseId
         category,
         name,
     };
@@ -18,6 +19,7 @@ function createExercise(category, name) {
 
 function createRoutine(name, exerciseIds) {
     return {
+        // Index position is routineId
         name,
         exerciseIds: exerciseIds || []
     };
@@ -27,7 +29,7 @@ function createActivity(date, bodyWeight, duration) {
     return {
         date,
         bodyWeight,
-        // beganAt, endedAt, totalTime
+        // @TODO: beganAt, endedAt, totalTime
         duration,
         records: []
     };
@@ -58,6 +60,18 @@ function getExerciseIdByName(name) {
     return foundId;
 };
 
+function getExerciseNameById(id) {
+    if (user.exercises[id]) {
+        return user.exercises[id].name;
+    };
+};
+
+function getRoutineNameById(id) {
+    if (user.routines[id]) {
+        return user.routines[id].name;
+    };
+};
+
 function padLeadingZeros(num) {
     let str = num.toString();
     while (str.length < 2) {
@@ -81,10 +95,10 @@ function activityTimer(startTime) {
     mins = padLeadingZeros(mins);
     secs = padLeadingZeros(secs);
     // @TODO
-    // document.getElementById('timer').innerHTML = hours + ":" + mins + ":" + secs;
+    document.getElementById('timer').innerHTML = hours + ":" + mins + ":" + secs;
 
     clearTimeout(activityTimer.interval);
-    activityTimer.interval = setTimeout(function(){ activityTimer(startTime); }, 1000);
+    activityTimer.interval = setTimeout(() => { activityTimer(startTime) }, 1000);
 };
 
 // Turns off activity timer
@@ -93,6 +107,15 @@ function stopActivityTimer() {
     // @TODO
     // user.activities[0].duration = document.getElementById('timer').innerHTML; // bad solution
     console.log("Stopped activity timer");
+};
+
+// Returns string with MM/DD/YYYY date format
+function getDate() {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    return (month + "/" + day + "/" + year); 
 };
 
 // Seeds all available exercises
@@ -107,27 +130,26 @@ function seedExercises() {
         createExercise("Chest", "Cable Chest Side Pulls"), // 6
         createExercise("Triceps", "Cable Rope Pulldowns"), // 7
         createExercise("Triceps", "Tricep Press Machine"), // 8
-        createExercise("Triceps", "Laying Tricep Extensions"), // 9
-        createExercise("Back", "Bent Over Rows"), // 10
-        createExercise("Back", "Shrugs"), // 11
-        createExercise("Back", "Stiff-Legged Deadlifts"), // 12
-        createExercise("Back", "Assisted Pull-up Machine (3 versions)"), // 13
-        createExercise("Back", "Fly Machine (Back)"), // 14
-        createExercise("Biceps", "Underhand Curls"), // 15
-        createExercise("Biceps", "Hammer Curls"), // 16
-        createExercise("Biceps", "Overhand Curls"), // 17
-        createExercise("Shoulders", "Side Raises"), // 18
-        createExercise("Shoulders", "Front Raises"), // 19
-        createExercise("Shoulders", "Shoulder Press Machine"), // 20
-        createExercise("Legs", "Leg Press Machine"), // 21
-        createExercise("Legs", "Leg Extension Machine"), // 22
-        createExercise("Legs", "Leg Curl Machine"), // 23
-        createExercise("Legs", "Calf Extension Machine"), // 24
-        createExercise("Legs", "Hip Abduction (Out) Machine"), // 25
-        createExercise("Legs", "Hip Adduction (In) Machine"), // 26
-        createExercise("Legs", "Standing Glute Machine"), // 27
-        createExercise("Core", "Abdominal Crunch Machine"), // 28
-        createExercise("Core", "Oblique Side Bend") // 29
+        createExercise("Back", "Bent Over Rows"), // 9
+        createExercise("Back", "Shrugs"), // 10
+        createExercise("Back", "Stiff-Leg Deadlifts"), // 11
+        createExercise("Back", "Assisted Pull-ups"), // 12
+        createExercise("Back", "Fly Machine (Back)"), // 13
+        createExercise("Biceps", "Underhand Curls"), // 14
+        createExercise("Biceps", "Hammer Curls"), // 15
+        createExercise("Biceps", "Overhand Curls"), // 16
+        createExercise("Shoulders", "Side Raises"), // 17
+        createExercise("Shoulders", "Front Raises"), // 18
+        createExercise("Shoulders", "Shoulder Press Machine"), // 19
+        createExercise("Legs", "Leg Press Machine"), // 20
+        createExercise("Legs", "Leg Extension Machine"), // 21
+        createExercise("Legs", "Leg Curl Machine"), // 22
+        createExercise("Legs", "Calf Extension Machine"), // 23
+        createExercise("Legs", "Hip Abduction (Out) Machine"), // 24
+        createExercise("Legs", "Hip Adduction (In) Machine"), // 25
+        createExercise("Legs", "Standing Glute Machine"), // 26
+        createExercise("Core", "Abdominal Crunch Machine"), // 27
+        createExercise("Core", "Oblique Side Bend") // 28
     ];
 };
 
@@ -143,7 +165,6 @@ function seedRoutines() {
                 getExerciseIdByName("Cable Chest Side Pulls"),
                 getExerciseIdByName("Cable Rope Pulldowns"),
                 getExerciseIdByName("Tricep Press Machine"),
-                getExerciseIdByName("Laying Tricep Extensions"),
                 getExerciseIdByName("Stretching")
             ]
         ),
@@ -151,8 +172,8 @@ function seedRoutines() {
                 getExerciseIdByName("Elliptical"),
                 getExerciseIdByName("Bent Over Rows"),
                 getExerciseIdByName("Shrugs"),
-                getExerciseIdByName("Stiff-Legged Deadlifts"),
-                getExerciseIdByName("Assisted Pull-up Machine (3 versions)"),
+                getExerciseIdByName("Stiff-Leg Deadlifts"),
+                getExerciseIdByName("Assisted Pull-ups"),
                 getExerciseIdByName("Fly Machine (Back)"),
                 getExerciseIdByName("Underhand Curls"),
                 getExerciseIdByName("Hammer Curls"),
@@ -193,50 +214,42 @@ function seedPerformanceData() {
             records: [
                 createRecord(getExerciseIdByName("Elliptical"), 7),
                 createRecord(getExerciseIdByName("Flat Bench Press"), null, [
-                    createWeightSet(70, 8),
-                    createWeightSet(112.5, 10),
-                    createWeightSet(112.5, 10),
-                    createWeightSet(112.5, 10),
-                    createWeightSet(112.5, 10)
+                    createWeightSet(115, 10),
+                    createWeightSet(115, 10),
+                    createWeightSet(115, 10),
+                    createWeightSet(115, 10)
                 ]),
                 createRecord(getExerciseIdByName("Incline Bench Press"), null, [
-                    createWeightSet(40, 8),
                     createWeightSet(70, 10),
                     createWeightSet(70, 10),
                     createWeightSet(70, 10),
                     createWeightSet(70, 10)
                 ]),
                 createRecord(getExerciseIdByName("Decline Bench Press"), null, [
-                    createWeightSet(70, 8),
-                    createWeightSet(112.5, 10),
-                    createWeightSet(112.5, 10),
-                    createWeightSet(112.5, 10),
-                    createWeightSet(112.5, 10)
+                    createWeightSet(115, 10),
+                    createWeightSet(115, 10),
+                    createWeightSet(115, 10),
+                    createWeightSet(115, 10)
                 ]),
                 createRecord(getExerciseIdByName("Fly Machine (Chest)"), null, [
-                    createWeightSet(110, 10),
-                    createWeightSet(110, 10),
-                    createWeightSet(110, 10)
+                    createWeightSet(115, 10),
+                    createWeightSet(115, 10),
+                    createWeightSet(115, 10)
                 ]),
                 createRecord(getExerciseIdByName("Cable Chest Side Pulls"), null, [
-                    createWeightSet(17.5, 10),
-                    createWeightSet(17.5, 10),
-                    createWeightSet(17.5, 10)
+                    createWeightSet(19, 10),
+                    createWeightSet(19, 10),
+                    createWeightSet(19, 10)
                 ]),
                 createRecord(getExerciseIdByName("Cable Rope Pulldowns"), null, [
-                    createWeightSet(34, 10),
-                    createWeightSet(34, 10),
-                    createWeightSet(34, 10)
+                    createWeightSet(37.5, 10),
+                    createWeightSet(37.5, 10),
+                    createWeightSet(37.5, 10)
                 ]),
                 createRecord(getExerciseIdByName("Tricep Press Machine"), null, [
-                    createWeightSet(160, 10),
-                    createWeightSet(160, 10),
-                    createWeightSet(160, 10)
-                ]),
-                createRecord(getExerciseIdByName("Laying Tricep Extensions"), null, [
-                    createWeightSet(40, 10),
-                    createWeightSet(40, 10),
-                    createWeightSet(40, 10)
+                    createWeightSet(175, 10),
+                    createWeightSet(175, 10),
+                    createWeightSet(175, 10)
                 ]),
                 createRecord(getExerciseIdByName("Stretching"), 10)
             ]
@@ -246,27 +259,24 @@ function seedPerformanceData() {
             records: [
                 createRecord(getExerciseIdByName("Elliptical"), 7),
                 createRecord(getExerciseIdByName("Bent Over Rows"), null, [
-                    createWeightSet(70, 8),
-                    createWeightSet(112.5, 10),
-                    createWeightSet(112.5, 10),
-                    createWeightSet(112.5, 10),
-                    createWeightSet(112.5, 10)
+                    createWeightSet(115, 10),
+                    createWeightSet(115, 10),
+                    createWeightSet(115, 10),
+                    createWeightSet(115, 10)
                 ]),
                 createRecord(getExerciseIdByName("Shrugs"), null, [
-                    createWeightSet(110, 8),
-                    createWeightSet(180, 10),
-                    createWeightSet(180, 10),
-                    createWeightSet(180, 10),
-                    createWeightSet(180, 10)
+                    createWeightSet(182.5, 10),
+                    createWeightSet(182.5, 10),
+                    createWeightSet(182.5, 10),
+                    createWeightSet(182.5, 10)
                 ]),
-                createRecord(getExerciseIdByName("Stiff-Legged Deadlifts"), null, [
-                    createWeightSet(70, 10),
+                createRecord(getExerciseIdByName("Stiff-Leg Deadlifts"), null, [
                     createWeightSet(95, 10),
                     createWeightSet(95, 10),
                     createWeightSet(95, 10),
                     createWeightSet(95, 10)
                 ]),
-                createRecord(getExerciseIdByName("Assisted Pull-up Machine (3 versions)"), null, [
+                createRecord(getExerciseIdByName("Assisted Pull-ups"), null, [
                     createWeightSet(40, 10),
                     createWeightSet(40, 10),
                     createWeightSet(40, 10)
@@ -373,64 +383,164 @@ function seedPerformanceData() {
     ];
 };
 
-// HTML BUILDING
-function buildHomePageHtml(routines) {
-    var routinesHtml = "";
-    var homeHtml = "";
-    var routineIds = [];
+function completeWorkout() {
+    let data = [];
+    data.push(getDate());
 
-    // Build routine buttons
-    routines.forEach((routine, i) => {
-        let id = "routine" + i; // EX: routine0
-        routineIds.push(id);
+    user.routines[currentRoutine].exerciseIds.forEach( (exerciseId, ind) => {
+        var id = "";
+        if (user.exercises[exerciseId].category === "Cardio" || user.exercises[exerciseId].category === "Miscellanous") {
+            id = "ex" + ind + "-duration";
+            data.push(document.getElementById(id).value);
+        } else {
+            var weightId = "";
+            var repsId = "";
+            var setText = "";
 
-        routinesHtml += `
-            <button type='button' class='btn btn-primary btn-lg btn-block'
-            id="${id}">${routine.name}</button><br />
-        `;
-    });   
+            for (let i = 0; i < user.seededData[currentRoutine].records[ind].sets.length; i++) {
+                weightId = "ex" + ind + "-weight" + i;
+                repsId = "ex" + ind + "-reps" + i;
+                
+                if (document.getElementById(weightId).value && document.getElementById(repsId).value) {
+                    setText += document.getElementById(weightId).value;
+                    setText += "x" + document.getElementById(repsId).value + ", ";
+                }
+            }
+            data.push(setText.slice(0, -2));
+        }
+    });
 
-    homeHtml = `
-        <div class="container">
-            <h1 class="display-4 text-center mt-4 mb-5">Fitness Tracker</h1>
-            ${routinesHtml}
+    data.push(document.getElementById("timer").innerHTML)
+
+    // Paste formatted data to textarea
+    let textarea = document.getElementById('results');
+    textarea.value = "";
+
+    data.forEach(entry => {
+        textarea.value += entry + "\n";
+    });
+
+    textarea.select();
+    textarea.setSelectionRange(0, 99999); /*For mobile devices*/
+
+    try {
+        console.log("Attempting to copy text...");
+        document.execCommand('copy');
+        } catch (err) {
+        console.err("Unable to copy text!", err);
+    }
+};
+
+// -----HTML BUILDING-----
+function buildActivityPageHtml(routineId) {
+    var activityHeaderHtml = `
+        <header>
+            <span><i class="material-icons" id="cancel">cancel</i></span>
+            <span><i class="material-icons">calendar_today</i>&nbsp; ${getDate()}</span>  
+            <span><i class="material-icons">timer</i>&nbsp; <span id="timer"></span></span>
+        </header> 
+    `;
+  
+    var detailsHtml = "";
+    user.seededData[routineId].records.forEach((record, rInd) => {
+        detailsHtml += `<div class="exercise">${getExerciseNameById(record.exerciseId)}</div>`;
+
+        if (record.exerciseId === 0 || record.exerciseId === 1) {
+            detailsHtml += `
+                <div class="details">
+                    <input type="number" id="ex${rInd}-duration" placeholder="${record.duration} minutes">
+                </div>
+            `;
+        } else {
+            record.sets.forEach((setItem, setInd) => {
+                detailsHtml += `
+                    <div class="details">
+                        <span class="setnum">${setInd + 1}</span>
+                        <input class="weight" type="number" id="ex${rInd}-weight${setInd}" placeholder="${setItem.weight} lbs">
+                        <input class="reps" type="number" id="ex${rInd}-reps${setInd}" placeholder="${setItem.reps} reps">
+                    </div>
+                `;
+            });
+        };
+    });
+
+    var routineExercisesHtml = `
+        <div class="weightset">
+            ${detailsHtml}
         </div>
     `;
 
-    // Ensure id has been cleared before adding new content
+    var activityPageHtml = `
+        <section class="activity">
+            ${activityHeaderHtml}
+            <h1 class="title">${getRoutineNameById(routineId)}</h1>
+            ${routineExercisesHtml}
+            <a href="#" class="btn-finished" onclick="completeWorkout()">To Clipboard</a>
+            <textarea id="results"></textarea>
+        </section>
+    `;
+
+    // Clear page content before appended new content
     $("#index").empty();
-    $("#index").append(homeHtml);
+    $("#index").append(activityPageHtml);
 
-    // Add click event to each routine button
-    routineIds.forEach((id, i) => {
-        $("#" + id).on('click', function(){
-            buildActivityPageHtml(user.routines[i], user.exercises);
-        });
+    // Cancel button confirm dialogue
+    $("#cancel").on('click', function(){
+        if (confirm("Close this workout?")){
+            stopActivityTimer();
+            buildHomePageHtml();
+        };
     });
-
-};
-
-function buildActivityPageHtml(routine, exercises) {
-    console.log(routine, exercises);
-    // @TODO
 
     // Start new activity now
     user.activities.push( createActivity(new Date(), null, null) );
     activityTimer(new Date());
 };
 
-function buildSummaryPageHtml(routines, exercises) {
-    // @TODO
+function buildHomePageHtml() {
+    var routinesHtml = "";
+    var homeHtml = "";
+    var routineIds = [];
+
+    // Build routine buttons
+    user.routines.forEach((routine, i) => {
+        let id = "routine" + i; // EX: routine0
+        routineIds.push(id);
+        routinesHtml += `<a href="#" class="btn" id="${id}">${routine.name}</a>`;
+    });   
+
+    homeHtml = `
+        <section class="home">
+            <h1 class="title">Fitness Tracker</h1>
+            <div class="routines">
+                ${routinesHtml}
+            </div>
+            <p>WIP Fitness Tracker v4 - Michael J</p>
+        </section>
+    `;
+
+    // Clear page content before appended new content
+    $("#index").empty();
+    $("#index").append(homeHtml);
+
+    // Add click event to each routine button
+    routineIds.forEach((id, i) => {
+        $(`#${id}`).on('click', function(){
+            // Build activity page with routineId
+            currentRoutine = i;
+            buildActivityPageHtml(i);
+        });
+    });
 };
 
 // -----BEGIN DATA-----
+var currentRoutine = null;
 var user = createUser();
 user.exercises = seedExercises();
 user.routines = seedRoutines();
-
-console.log(user);
+user.seededData = seedPerformanceData();
 
 // -----BEGIN HTML-----
 $(document).ready(function(){
-    buildHomePageHtml(user.routines);
+    buildHomePageHtml();
 });
