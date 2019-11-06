@@ -162,7 +162,6 @@ function seedRoutines() {
                 getExerciseIdByName("Incline Bench Press"),
                 getExerciseIdByName("Decline Bench Press"),
                 getExerciseIdByName("Fly Machine (Chest)"),
-                getExerciseIdByName("Cable Chest Side Pulls"),
                 getExerciseIdByName("Cable Rope Pulldowns"),
                 getExerciseIdByName("Tricep Press Machine"),
                 getExerciseIdByName("Stretching")
@@ -174,10 +173,9 @@ function seedRoutines() {
                 getExerciseIdByName("Shrugs"),
                 getExerciseIdByName("Stiff-Leg Deadlifts"),
                 getExerciseIdByName("Assisted Pull-ups"),
-                getExerciseIdByName("Fly Machine (Back)"),
+                getExerciseIdByName("Overhand Curls"),
                 getExerciseIdByName("Underhand Curls"),
                 getExerciseIdByName("Hammer Curls"),
-                getExerciseIdByName("Overhand Curls"),
                 getExerciseIdByName("Stretching")
             ]
         ),
@@ -190,9 +188,9 @@ function seedRoutines() {
                 getExerciseIdByName("Leg Extension Machine"),
                 getExerciseIdByName("Leg Curl Machine"),
                 getExerciseIdByName("Calf Extension Machine"),
+                getExerciseIdByName("Standing Glute Machine"),
                 getExerciseIdByName("Hip Abduction (Out) Machine"),
                 getExerciseIdByName("Hip Adduction (In) Machine"),
-                getExerciseIdByName("Standing Glute Machine"),
                 getExerciseIdByName("Abdominal Crunch Machine"),
                 getExerciseIdByName("Oblique Side Bend"),
                 getExerciseIdByName("Stretching")
@@ -214,10 +212,10 @@ function seedPerformanceData() {
             records: [
                 createRecord(getExerciseIdByName("Elliptical"), 7),
                 createRecord(getExerciseIdByName("Flat Bench Press"), null, [
-                    createWeightSet(117.5, 10),
-                    createWeightSet(117.5, 10),
-                    createWeightSet(117.5, 10),
-                    createWeightSet(117.5, 10)
+                    createWeightSet(120, 10),
+                    createWeightSet(120, 10),
+                    createWeightSet(120, 10),
+                    createWeightSet(120, 10)
                 ]),
                 createRecord(getExerciseIdByName("Incline Bench Press"), null, [
                     createWeightSet(72.5, 10),
@@ -226,32 +224,27 @@ function seedPerformanceData() {
                     createWeightSet(72.5, 10)
                 ]),
                 createRecord(getExerciseIdByName("Decline Bench Press"), null, [
-                    createWeightSet(117.5, 10),
-                    createWeightSet(117.5, 10),
-                    createWeightSet(117.5, 10),
-                    createWeightSet(117.5, 10)
+                    createWeightSet(120, 10),
+                    createWeightSet(120, 10),
+                    createWeightSet(120, 10),
+                    createWeightSet(120, 10)
                 ]),
                 createRecord(getExerciseIdByName("Fly Machine (Chest)"), null, [
-                    createWeightSet(115, 10),
-                    createWeightSet(115, 10),
-                    createWeightSet(115, 10)
+                    createWeightSet(120, 10),
+                    createWeightSet(120, 10),
+                    createWeightSet(120, 10)
                 ]),
-                createRecord(getExerciseIdByName("Cable Chest Side Pulls"), null, [
-                    createWeightSet(20.5, 10),
-                    createWeightSet(20.5, 10),
-                    createWeightSet(20.5, 10)
-                ]),
-                createRecord(getExerciseIdByName("Cable Rope Pulldowns"), null, [
-                    createWeightSet(39, 10),
-                    createWeightSet(39, 10),
-                    createWeightSet(39, 10)
+                createRecord(getExerciseIdByName("Cable Tricep Pulldowns"), null, [
+                    createWeightSet(40, 10),
+                    createWeightSet(40, 10),
+                    createWeightSet(40, 10)
                 ]),
                 createRecord(getExerciseIdByName("Tricep Press Machine"), null, [
-                    createWeightSet(180, 10),
-                    createWeightSet(180, 10),
-                    createWeightSet(180, 10)
+                    createWeightSet(185, 10),
+                    createWeightSet(185, 10),
+                    createWeightSet(185, 10)
                 ]),
-                createRecord(getExerciseIdByName("Stretching"), 10)
+                createRecord(getExerciseIdByName("Stretching"), 9)
             ]
         },
         {
@@ -259,49 +252,44 @@ function seedPerformanceData() {
             records: [
                 createRecord(getExerciseIdByName("Elliptical"), 7),
                 createRecord(getExerciseIdByName("Bent Over Rows"), null, [
-                    createWeightSet(115, 10),
-                    createWeightSet(115, 10),
-                    createWeightSet(115, 10),
-                    createWeightSet(115, 10)
+                    createWeightSet(117.5, 10),
+                    createWeightSet(117.5, 10),
+                    createWeightSet(117.5, 10),
+                    createWeightSet(117.5, 10)
                 ]),
                 createRecord(getExerciseIdByName("Shrugs"), null, [
-                    createWeightSet(185, 10),
-                    createWeightSet(185, 10),
-                    createWeightSet(185, 10),
-                    createWeightSet(185, 10)
+                    createWeightSet(187.5, 10),
+                    createWeightSet(187.5, 10),
+                    createWeightSet(187.5, 10),
+                    createWeightSet(187.5, 10)
                 ]),
                 createRecord(getExerciseIdByName("Stiff-Leg Deadlifts"), null, [
-                    createWeightSet(97.5, 10),
-                    createWeightSet(97.5, 10),
-                    createWeightSet(97.5, 10),
-                    createWeightSet(97.5, 10)
+                    createWeightSet(100, 10),
+                    createWeightSet(100, 10),
+                    createWeightSet(100, 10),
+                    createWeightSet(100, 10)
                 ]),
                 createRecord(getExerciseIdByName("Assisted Pull-ups"), null, [
-                    createWeightSet(40, 10),
-                    createWeightSet(40, 10),
-                    createWeightSet(40, 10)
-                ]),
-                createRecord(getExerciseIdByName("Fly Machine (Back)"), null, [
-                    createWeightSet(80, 10),
-                    createWeightSet(80, 10),
-                    createWeightSet(80, 10)
-                ]),
-                createRecord(getExerciseIdByName("Underhand Curls"), null, [
-                    createWeightSet(50, 10),
-                    createWeightSet(50, 10),
-                    createWeightSet(50, 10)
-                ]),
-                createRecord(getExerciseIdByName("Hammer Curls"), null, [
-                    createWeightSet(25, 10),
-                    createWeightSet(25, 10),
-                    createWeightSet(25, 10)
+                    createWeightSet(30, 10),
+                    createWeightSet(30, 10),
+                    createWeightSet(30, 10)
                 ]),
                 createRecord(getExerciseIdByName("Overhand Curls"), null, [
                     createWeightSet(30, 10),
                     createWeightSet(30, 10),
                     createWeightSet(30, 10)
                 ]),
-                createRecord(getExerciseIdByName("Stretching"), 10)
+                createRecord(getExerciseIdByName("Underhand Curls"), null, [
+                    createWeightSet(25, 10),
+                    createWeightSet(25, 10),
+                    createWeightSet(25, 10)
+                ]),
+                createRecord(getExerciseIdByName("Hammer Curls"), null, [
+                    createWeightSet(25, 10),
+                    createWeightSet(25, 10),
+                    createWeightSet(25, 10)
+                ]),
+                createRecord(getExerciseIdByName("Stretching"), 9)
             ]
         },
         {
@@ -319,44 +307,44 @@ function seedPerformanceData() {
                     createWeightSet(10, 10)
                 ]),
                 createRecord(getExerciseIdByName("Shoulder Press Machine"), null, [
-                    createWeightSet(55, 10),
-                    createWeightSet(55, 10),
-                    createWeightSet(55, 10)
+                    createWeightSet(60, 10),
+                    createWeightSet(60, 10),
+                    createWeightSet(60, 10)
                 ]),
                 createRecord(getExerciseIdByName("Leg Press Machine"), null, [
-                    createWeightSet(170, 10),
-                    createWeightSet(170, 10),
-                    createWeightSet(170, 10)
+                    createWeightSet(175, 10),
+                    createWeightSet(175, 10),
+                    createWeightSet(175, 10)
                 ]),
                 createRecord(getExerciseIdByName("Leg Extension Machine"), null, [
-                    createWeightSet(85, 10),
-                    createWeightSet(85, 10),
-                    createWeightSet(85, 10)
+                    createWeightSet(90, 10),
+                    createWeightSet(90, 10),
+                    createWeightSet(90, 10)
                 ]),
                 createRecord(getExerciseIdByName("Leg Curl Machine"), null, [
-                    createWeightSet(80, 10),
-                    createWeightSet(80, 10),
-                    createWeightSet(80, 10)
+                    createWeightSet(85, 10),
+                    createWeightSet(85, 10),
+                    createWeightSet(90, 10)
                 ]),
                 createRecord(getExerciseIdByName("Calf Extension Machine"), null, [
-                    createWeightSet(170, 10),
-                    createWeightSet(170, 10),
-                    createWeightSet(170, 10)
-                ]),
-                createRecord(getExerciseIdByName("Hip Abduction (Out) Machine"), null, [
-                    createWeightSet(195, 10),
-                    createWeightSet(195, 10),
-                    createWeightSet(195, 10)
-                ]),
-                createRecord(getExerciseIdByName("Hip Adduction (In) Machine"), null, [
-                    createWeightSet(160, 10),
-                    createWeightSet(160, 10),
-                    createWeightSet(160, 10)
+                    createWeightSet(175, 10),
+                    createWeightSet(175, 10),
+                    createWeightSet(175, 10)
                 ]),
                 createRecord(getExerciseIdByName("Standing Glute Machine"), null, [
-                    createWeightSet(120, 10),
-                    createWeightSet(120, 10),
-                    createWeightSet(120, 10)
+                    createWeightSet(125, 10),
+                    createWeightSet(125, 10),
+                    createWeightSet(125, 10)
+                ]),
+                createRecord(getExerciseIdByName("Hip Abduction (Out) Machine"), null, [
+                    createWeightSet(200, 10),
+                    createWeightSet(200, 10),
+                    createWeightSet(200, 10)
+                ]),
+                createRecord(getExerciseIdByName("Hip Adduction (In) Machine"), null, [
+                    createWeightSet(165, 10),
+                    createWeightSet(165, 10),
+                    createWeightSet(165, 10)
                 ]),
                 createRecord(getExerciseIdByName("Abdominal Crunch Machine"), null, [
                     createWeightSet(35, 25),
@@ -370,7 +358,7 @@ function seedPerformanceData() {
                     createWeightSet(45, 25),
                     createWeightSet(45, 25)
                 ]),
-                createRecord(getExerciseIdByName("Stretching"), 10)
+                createRecord(getExerciseIdByName("Stretching"), 9)
             ]
         },
         {
